@@ -30,14 +30,14 @@ export default function Login({ navigation }) {
             })
     }
     const handleSignIn = () => {
-        if (email != '' && password !=''){
-        signInWithEmailAndPassword(auth, email.trim(), password)
+        if (email != undefined && password !=undefined){
+        signInWithEmailAndPassword(auth, email.trim(), password.trim())
             .then((userCredential) => {
                 Keyboard.dismiss();
                 console.log("usuario logado")
                 const user = userCredential.user;
                 console.log(user);
-                navigation.navigate('index')
+                navigation.navigate('full')
             })
             .catch(error => {
                 console.log(error)

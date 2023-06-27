@@ -16,32 +16,35 @@ export default function Register({ navigation }) {
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    const temp = () => {
-        navigation.navigate('contaCriada');
-    }
 
     const handleCreateAccount = () => {
-        if (password == confirmPassword || password == '' || confirmPassword == '') {
-            createUserWithEmailAndPassword(auth, email.trim(), password.trim())
-                .then((userCredential) => {
-                    console.log('Conta criada!')
-                    const user = userCredential.user;
-                    console.log(user);
-                    setInterval(temp, 1000);
-                })
-                .catch(error => {
-                    console.log(error)
-                    if (password != '' && confirmPassword != '' && email != '') {
-                        setError("Email inválido!")
-                        setTimeout(tirarText, 4000)
-                    } else {
-                        setError("Preencha os campos!")
-                        setTimeout(tirarText, 4000)
-                    }
-                })
+        if (password == confirmPassword) {
+            if (email != undefined && password != undefined) {
+                if (password.length >= 6) {
+                    createUserWithEmailAndPassword(auth, email.trim(), password.trim())
+                        .then((userCredential) => {
+                            console.log('Conta criada!')
+                            const user = userCredential.user;
+                            console.log(user);
+                            navigation.navigate('contaCriada');
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            setError("Email inválido!")
+                            setTimeout(tirarText, 4000)
+
+                        })
+                } else {
+                    setError("A senha deve ter no mínimo 6 caracteres!")
+                    setTimeout(tirarText, 4000)
+                }
+            } else {
+                setError("Preencha os campos!")
+                setTimeout(tirarText, 4000)
+            }
         } else {
             setError("As senhas não coencidem!")
-                setTimeout(tirarText, 4000)
+            setTimeout(tirarText, 4000)
         }
     }
 

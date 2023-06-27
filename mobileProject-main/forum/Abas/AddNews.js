@@ -3,6 +3,8 @@ import * as React from 'react';
 import { database } from '../fb';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import { AntDesign } from '@expo/vector-icons';
+
 
 export default function AddNews() {
   const navigation = useNavigation();
@@ -12,13 +14,14 @@ export default function AddNews() {
     createdAt: new Date(),
   });
 
-  const onSend = async () => {
+  const onSend = async (navigation) => {
     await addDoc(collection(database, 'ProjetoFirebase'), newNews);
-    
+    navigation.goBack();
   };
 
   return (
     <View style={styles.container}>
+      
       <Text style={styles.txt}>Adicionar noticia</Text>
       <TextInput
         style={styles.input}
@@ -34,6 +37,9 @@ export default function AddNews() {
       <TouchableOpacity style={styles.btn} onPress={onSend}>
         <Text style={styles.txtbtn}>Adicionar noticias</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('edit')} style={styles.arrow}>
+        <AntDesign name="back" size={24} color="black" />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -41,21 +47,23 @@ export default function AddNews() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ddd2d2',
+    backgroundColor: '#F1FFFA',
     alignItems: 'center',
     justifyContent: 'center',
   },
   btn: {
-    backgroundColor: '#615856',
-    paddingHorizontal: '3%',
-    paddingVertical: '1%',
+    backgroundColor: '#004B86',
+    paddingVertical: '2%',
     borderRadius: 5,
     marginBottom: 5,
     textAlign: 'center',
-    width: '20%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '40%',
+    marginTop: '5%',
   },
   txtbtn: {
-    color: '#ddd2d2',
+    color: '#F1FFFA',
   },
   input: {
     borderWidth: 1,
@@ -65,4 +73,14 @@ const styles = StyleSheet.create({
     marginBottom: '1%',
     width: '70%',
   },
+  arrow:{
+    marginTop: '5%',
+
+  },
+  txt:{
+    marginBottom: '5%',
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#968e8d',
+  }
 });

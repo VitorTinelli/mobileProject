@@ -1,9 +1,8 @@
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDdc261V6s9ff61TAkhxp0t6ueLuty5vCM",
-  authDomain: "newforumdb.firebaseapp.com",
-  projectId: "newforumdb",
-  storageBucket: "newforumdb.appspot.com",
-  messagingSenderId: "881657044506",
-  appId: "1:881657044506:web:edf7c5be128ab16973bba3"
+export const firebaseConfig = {
+  apiKey: "AIzaSyBNtNvxjHJyRo6iDZdFRNiKIyP4s3-ZmRk",
+  authDomain: "forumbrgs.firebaseapp.com",
+  projectId: "forumbrgs",
+  storageBucket: "forumbrgs.appspot.com",
+  messagingSenderId: "51873869252",
+  appId: "1:51873869252:web:2ea2e1664f7ebc631dc891"
 };

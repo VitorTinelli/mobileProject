@@ -1,53 +1,80 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import * as React from 'react';
+import { StyleSheet,Text, View, TouchableOpacity} from 'react-native';
 import { database } from '../fb';
-import NewsItem from './NewsItem';
-import FullNews from './FullNews';
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore';
+import { AntDesign  } from '@expo/vector-icons'; 
+import { useNavigation } from '@react-navigation/native';
 
-export default function News({ navigation }) {
-  const [news, setNews] = useState([]);
-  const [selectedNews, setSelectedNews] = useState(null);
+export default function News ({
+    id,
+    title,
+    content
+}) {
+    const navigation = useNavigation();
 
-  useEffect(() => {
-    const collectionRef = collection(database, 'news'); 
-    const q = query(collectionRef, orderBy('createdAt', 'desc'));
-
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const updatedNews = querySnapshot.docs.map((doc) => doc.data());
-      setNews(updatedNews);
-    });
-
-    return unsubscribe;
-  }, []);
-
-  return (
-    <View style={styles.container}>
-      <Text> Noticias: </Text>
-      {news.map((item, index) => (
-        <View key={index} style={styles.newsContainer}>
-          <Text style={styles.newsText}>{item.title}</Text>
-          <Text style={styles.newsText}>{item.content}</Text>
-          
+    const onDelete = () => {
+        const docRef = doc(database, 'ProjetoFirebase', id);
+        deleteDoc(docRef);
+    }
+    return(
+        <View style={styles.container}>
+            <View style={styles.row}> 
+                <View style={styles.col}>
+                    <Text style={styles.txt}>{title}</Text>
+                    <Text style={styles.subtitle}>{content}</Text>
+                </View>
+                <Text>                             </Text>
+                <TouchableOpacity onPress={onDelete}>
+                    <AntDesign name="delete" size={32} color="#615856" />
+                </TouchableOpacity>             
+           </View>
         </View>
-      ))}
-    </View>
-  );
-}
+    )
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ddd2d2',
-    alignItems: 'center',
-    justifyContent: 'center',
+    container: {
+      backgroundColor: '#EFF3FB',
+
+      justifyContent: 'center',
+      width:'80%',
+      borderRadius: 10,
+      paddingBottom: 10,
+      marginBottom: '2%',
+    },
+    col:{
+        flexDirection: 'column',
+    },
+    row:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginStart: '4%',
+        marginEnd: '4%',
+        alignItems: 'center', 
+    },
+    txt:{
+        fontSize: 32,
+        color: "#615856",
+    },
+    subtitle:{
+      fontSize: 15,
+      color: "#615856",
   },
-  newsContainer: {
-    marginBottom: 20,
-  },
-  newsText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 8,
-  },
-});
+    btn:{
+        backgroundColor: "#615856",
+        paddingHorizontal: "3%",
+        paddingVertical: "1%", 
+        justifyContent: 'center',
+        borderRadius: 5,
+        marginBottom: 5,
+        width: 200,
+        height: 40,
+        
+      },
+      txtbtn :{
+        color: "#ddd2d2",
+        fontSize: 32,
+        textAlign: 'center',
+        justifyContent: 'center'
+      },
+})

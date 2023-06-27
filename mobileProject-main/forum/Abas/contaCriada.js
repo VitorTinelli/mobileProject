@@ -5,10 +5,12 @@ export default function ContaCriada({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
+            <TouchableOpacity onPress={() => navigation.navigate('login')}>
             <Image style={styles.img} source={require('../assets/correto.webp')} />
             <Text style={styles.txt}>
                 Conta criada com sucesso!
             </Text>
+        </TouchableOpacity>
         </SafeAreaView>
     );
 }

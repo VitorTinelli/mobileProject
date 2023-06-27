@@ -14,18 +14,18 @@ export default function AddNews() {
     createdAt: new Date(),
   });
 
-  const onSend = async (navigation) => {
+  const onSend = async () => {
     await addDoc(collection(database, 'ProjetoFirebase'), newNews);
-    navigation.goBack();
+    navigation.navigate('full');
   };
 
   return (
     <View style={styles.container}>
       
-      <Text style={styles.txt}>Adicionar noticia</Text>
+      <Text style={styles.txt}>Adicionar discussão</Text>
       <TextInput
         style={styles.input}
-        placeholder='Titulo de noticia'
+        placeholder='Titulo'
         onChangeText={(text) => setNewNews({ ...newNews, title: text })}
       />
       <TextInput
@@ -35,7 +35,7 @@ export default function AddNews() {
         onChangeText={(text) => setNewNews({ ...newNews, content: text })}
       />
       <TouchableOpacity style={styles.btn} onPress={onSend}>
-        <Text style={styles.txtbtn}>Adicionar noticias</Text>
+        <Text style={styles.txtbtn}>Adicionar discussão</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('edit')} style={styles.arrow}>
         <AntDesign name="back" size={24} color="black" />

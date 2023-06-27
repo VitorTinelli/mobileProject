@@ -54,7 +54,7 @@ export default function Login({ navigation }) {
 
 
     return (
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate('welcome')} style={styles.arrow}>
                 <AntDesign name="back" size={24} color="black" />
             </TouchableOpacity>
@@ -81,7 +81,7 @@ export default function Login({ navigation }) {
                 <Text>Esqueci minha senha</Text>
             </TouchableOpacity>
             <StatusBar style="auto" />
-        </SafeAreaView>
+        </View>
     );
 }
 

@@ -39,7 +39,7 @@ export default function FullNews(){
         <TouchableOpacity style={styles.edit}onPress={() => navigation.navigate('edit')}>
             <AntDesign name="user" size={40} color="black" />       
           </TouchableOpacity>
-        <Text style={styles.txt}>Noticias:</Text>
+        <Text style={styles.txt}>Discussões:</Text>
         <Text>   </Text>
         {news.map(noticia => <News key={noticia.id} {...noticia} />)}
         <View style={styles.row}>

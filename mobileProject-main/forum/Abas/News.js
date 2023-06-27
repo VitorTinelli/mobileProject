@@ -35,15 +35,15 @@ export default function News ({
 const styles = StyleSheet.create({
     container: {
       backgroundColor: '#EFF3FB',
-
       justifyContent: 'center',
       width:'80%',
       borderRadius: 10,
       paddingBottom: 10,
       marginBottom: '2%',
     },
-    col:{
+    col:{ 
         flexDirection: 'column',
+        flexShrink: 1,
     },
     row:{
         flexDirection: 'row',
@@ -53,12 +53,15 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
     },
     txt:{
-        fontSize: 32,
+        fontSize: 24,
         color: "#615856",
+        fontWeight: 'bold',
+        textAlign: 'justify',
     },
     subtitle:{
-      fontSize: 15,
+      fontSize: 14,
       color: "#615856",
+      textAlign: 'justify',
   },
     btn:{
         backgroundColor: "#615856",
